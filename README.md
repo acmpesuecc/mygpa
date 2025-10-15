@@ -1,4 +1,4 @@
-# MyGPA
+# MyGPA 🎓
 
 [**MyGPA**](https://mygpa.vercel.app) is a web-based GPA calculator built with **Next.js**, **TypeScript**, **Tailwind CSS** and **Motion**.  
 
