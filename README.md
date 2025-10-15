@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MyGPA
 
-## Getting Started
+[**MyGPA**](https://mygpa.vercel.app) is a web-based GPA calculator built with **Next.js**, **TypeScript**, **Tailwind CSS** and **Motion**.  
 
-First, run the development server:
+## Setup
+
+### Clone and install
+
+**NOTE:** Do ensure you have the latest versions of **Node.js** and **npm** available locally.
+
+```bash
+git clone https://github.com/acmpesuecc/mygpa.git
+cd mygpa
+npm install
+```
+### Run the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+Then, visit [http://localhost:3000](http://localhost:3000) on your browser
+
+### Verify code quality
+
+```bash
+npm run type-check
+npm run lint
+npm run fmt
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Build for production
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+npm run start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Contributing
 
-## Learn More
+Want to get involved? Check out the [CONTRIBUTING.md](CONTRIBUTING.md) guide to learn how you can contribute code, suggest improvements, or report issues.
 
-To learn more about Next.js, take a look at the following resources:
+## License
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This project is licensed under the MIT License — free for personal and commercial use with attribution.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+See the [LICENSE](LICENSE) file for more details.
 
-## Deploy on Vercel
+## Maintainers(s)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+[**Achyuth Yogesh Sosale**](https://github.com/achyuthcodes30) - achyuthyogesh0@gmail.com
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
