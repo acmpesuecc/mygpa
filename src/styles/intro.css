@@ -1,0 +1,25 @@
+.el-11,
+.el-12,
+.el-13,
+.el-14,
+.el-15 {
+    color: #000;
+
+    transition:
+        background-color 10s ease,
+        color 10s ease;
+}
+@keyframes changeColors {
+    to {
+        background-color: #000;
+        color: #fff;
+    }
+}
+
+.el-11.change-style,
+.el-12.change-style,
+.el-13.change-style,
+.el-14.change-style,
+.el-15.change-style {
+    animation: changeColors 2s forwards 4s;
+}
