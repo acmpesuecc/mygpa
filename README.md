@@ -45,7 +45,7 @@ This project is licensed under the MIT License — free for personal and commerc
 
 See the [LICENSE](LICENSE) file for more details.
 
-## Maintainers(s)
+## Maintainer(s)
 
 [**Achyuth Yogesh Sosale**](https://github.com/achyuthcodes30) - achyuthyogesh0@gmail.com
 
