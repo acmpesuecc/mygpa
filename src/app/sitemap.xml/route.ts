@@ -1,7 +1,7 @@
-import { NextResponse } from 'next/server';
+import { NextResponse } from "next/server";
 
 export function GET() {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://mygpa.vercel.app';
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://mygpa.vercel.app";
     const currentDate = new Date().toISOString();
 
     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
@@ -28,7 +28,7 @@ export function GET() {
 
     return new NextResponse(sitemap, {
         headers: {
-            'Content-Type': 'application/xml',
+            "Content-Type": "application/xml",
         },
     });
 }

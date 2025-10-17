@@ -1,8 +1,8 @@
-import { NextResponse } from 'next/server';
+import { NextResponse } from "next/server";
 
 export function GET() {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://mygpa.vercel.app';
-    
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://mygpa.vercel.app";
+
     const robotsTxt = `User-agent: *
 Allow: /
 
@@ -28,7 +28,7 @@ Allow: /`;
 
     return new NextResponse(robotsTxt, {
         headers: {
-            'Content-Type': 'text/plain',
+            "Content-Type": "text/plain",
         },
     });
 }

@@ -17,50 +17,49 @@ export default function HomePageClient() {
         window.addEventListener("resize", updateMedia);
         return () => window.removeEventListener("resize", updateMedia);
     }, []);
-    
+
     const structuredData = {
         "@context": "https://schema.org",
         "@type": "WebPage",
-        "name": "MyGPA - GPA Calculator for PES University Students",
-        "description": "Welcome to MyGPA - Your comprehensive GPA calculator for PES University. Calculate CGPA and SGPA with ease and track your academic progress.",
-        "url": process.env.NEXT_PUBLIC_BASE_URL || 'https://mygpa.vercel.app',
-        "mainEntity": {
+        name: "MyGPA - GPA Calculator for PES University Students",
+        description:
+            "Welcome to MyGPA - Your comprehensive GPA calculator for PES University. Calculate CGPA and SGPA with ease and track your academic progress.",
+        url: process.env.NEXT_PUBLIC_BASE_URL || "https://mygpa.vercel.app",
+        mainEntity: {
             "@type": "WebApplication",
-            "name": "MyGPA",
-            "description": "Calculate your CGPA and SGPA with our easy-to-use GPA calculator designed specifically for PES University students.",
-            "applicationCategory": "EducationalApplication",
-            "operatingSystem": "Web Browser",
-            "offers": {
+            name: "MyGPA",
+            description:
+                "Calculate your CGPA and SGPA with our easy-to-use GPA calculator designed specifically for PES University students.",
+            applicationCategory: "EducationalApplication",
+            operatingSystem: "Web Browser",
+            offers: {
                 "@type": "Offer",
-                "price": "0",
-                "priceCurrency": "USD"
+                price: "0",
+                priceCurrency: "USD",
             },
-            "featureList": [
+            featureList: [
                 "CGPA Calculator",
                 "SGPA Calculator",
                 "Grade Point Average Calculation",
-                "PES University Grade System"
-            ]
+                "PES University Grade System",
+            ],
         },
-        "breadcrumb": {
+        breadcrumb: {
             "@type": "BreadcrumbList",
-            "itemListElement": [
+            itemListElement: [
                 {
                     "@type": "ListItem",
-                    "position": 1,
-                    "name": "Home",
-                    "item": process.env.NEXT_PUBLIC_BASE_URL || 'https://mygpa.vercel.app'
-                }
-            ]
-        }
+                    position: 1,
+                    name: "Home",
+                    item: process.env.NEXT_PUBLIC_BASE_URL || "https://mygpa.vercel.app",
+                },
+            ],
+        },
     };
-    
+
     return (
         <>
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-            />
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
             <main className="min-w-screen min-h-screen touch-pan-x overflow-hidden">
                 {typeof window !== "undefined" ? (
                     isSlim ? (

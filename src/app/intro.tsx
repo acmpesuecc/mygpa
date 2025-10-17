@@ -43,11 +43,11 @@ export default function Intro({ welcome }: { welcome: string }) {
 
     return (
         <div className=" min-h-full min-w-full touch-pan-x overflow-hidden" onClick={skipAnimation}>
-            <Image 
-                src="/introbg.jpg" 
-                objectFit="cover" 
-                fill={true} 
-                alt="MyGPA background image showing academic theme" 
+            <Image
+                src="/introbg.jpg"
+                objectFit="cover"
+                fill={true}
+                alt="MyGPA background image showing academic theme"
                 loading="eager"
                 priority
                 sizes="100vw"

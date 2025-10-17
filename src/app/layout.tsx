@@ -11,10 +11,19 @@ const inter = Inter({
 export const metadata: Metadata = {
     title: {
         default: "MyGPA - GPA Calculator for PES University Students",
-        template: "%s | MyGPA"
+        template: "%s | MyGPA",
     },
-    description: "Calculate your CGPA and SGPA with our easy-to-use GPA calculator designed specifically for PES University students. Track your academic performance and plan your studies effectively.",
-    keywords: ["GPA calculator", "CGPA calculator", "SGPA calculator", "PES University", "grade calculator", "academic performance", "student tools"],
+    description:
+        "Calculate your CGPA and SGPA with our easy-to-use GPA calculator designed specifically for PES University students. Track your academic performance and plan your studies effectively.",
+    keywords: [
+        "GPA calculator",
+        "CGPA calculator",
+        "SGPA calculator",
+        "PES University",
+        "grade calculator",
+        "academic performance",
+        "student tools",
+    ],
     authors: [{ name: "MyGPA Team" }],
     creator: "MyGPA",
     publisher: "MyGPA",
@@ -23,16 +32,17 @@ export const metadata: Metadata = {
         address: false,
         telephone: false,
     },
-    metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://mygpa.vercel.app'),
+    metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || "https://mygpa.vercel.app"),
     alternates: {
-        canonical: '/',
+        canonical: "/",
     },
     openGraph: {
         type: "website",
         locale: "en_US",
         url: "/",
         title: "MyGPA - GPA Calculator for PES University Students",
-        description: "Calculate your CGPA and SGPA with our easy-to-use GPA calculator designed specifically for PES University students.",
+        description:
+            "Calculate your CGPA and SGPA with our easy-to-use GPA calculator designed specifically for PES University students.",
         siteName: "MyGPA",
         images: [
             {
@@ -46,7 +56,8 @@ export const metadata: Metadata = {
     twitter: {
         card: "summary_large_image",
         title: "MyGPA - GPA Calculator for PES University Students",
-        description: "Calculate your CGPA and SGPA with our easy-to-use GPA calculator designed specifically for PES University students.",
+        description:
+            "Calculate your CGPA and SGPA with our easy-to-use GPA calculator designed specifically for PES University students.",
         images: ["/icon.png"],
         creator: "@mygpa",
     },
@@ -70,24 +81,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     const structuredData = {
         "@context": "https://schema.org",
         "@type": "WebApplication",
-        "name": "MyGPA",
-        "description": "Calculate your CGPA and SGPA with our easy-to-use GPA calculator designed specifically for PES University students.",
-        "url": process.env.NEXT_PUBLIC_BASE_URL || 'https://mygpa.vercel.app',
-        "applicationCategory": "EducationalApplication",
-        "operatingSystem": "Web Browser",
-        "offers": {
+        name: "MyGPA",
+        description:
+            "Calculate your CGPA and SGPA with our easy-to-use GPA calculator designed specifically for PES University students.",
+        url: process.env.NEXT_PUBLIC_BASE_URL || "https://mygpa.vercel.app",
+        applicationCategory: "EducationalApplication",
+        operatingSystem: "Web Browser",
+        offers: {
             "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
+            price: "0",
+            priceCurrency: "USD",
         },
-        "creator": {
+        creator: {
             "@type": "Organization",
-            "name": "MyGPA Team"
+            name: "MyGPA Team",
         },
-        "audience": {
+        audience: {
             "@type": "EducationalAudience",
-            "educationalRole": "student"
-        }
+            educationalRole: "student",
+        },
     };
 
     return (
@@ -98,10 +110,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <meta name="apple-mobile-web-app-capable" content="yes" />
             <meta name="apple-mobile-web-app-status-bar-style" content="default" />
             <meta name="apple-mobile-web-app-title" content="MyGPA" />
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-            />
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
             <body className={`font-sans ${inter.variable}`}>{children}</body>
         </html>
     );

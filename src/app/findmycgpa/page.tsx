@@ -5,17 +5,20 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
     title: "CGPA Calculator",
-    description: "Calculate your Cumulative Grade Point Average (CGPA) for PES University. Enter your grades and credits to get your accurate CGPA instantly.",
+    description:
+        "Calculate your Cumulative Grade Point Average (CGPA) for PES University. Enter your grades and credits to get your accurate CGPA instantly.",
     keywords: ["CGPA calculator", "cumulative GPA", "PES University", "grade point average", "academic calculator"],
     openGraph: {
         title: "CGPA Calculator - MyGPA",
-        description: "Calculate your Cumulative Grade Point Average (CGPA) for PES University. Enter your grades and credits to get your accurate CGPA instantly.",
+        description:
+            "Calculate your Cumulative Grade Point Average (CGPA) for PES University. Enter your grades and credits to get your accurate CGPA instantly.",
         url: "/findmycgpa",
         type: "website",
     },
     twitter: {
         title: "CGPA Calculator - MyGPA",
-        description: "Calculate your Cumulative Grade Point Average (CGPA) for PES University. Enter your grades and credits to get your accurate CGPA instantly.",
+        description:
+            "Calculate your Cumulative Grade Point Average (CGPA) for PES University. Enter your grades and credits to get your accurate CGPA instantly.",
     },
     alternates: {
         canonical: "/findmycgpa",
@@ -43,46 +46,44 @@ function FindMyCGPA() {
     const structuredData = {
         "@context": "https://schema.org",
         "@type": "WebPage",
-        "name": "CGPA Calculator",
-        "description": "Calculate your Cumulative Grade Point Average (CGPA) for PES University. Enter your grades and credits to get your accurate CGPA instantly.",
-        "url": `${process.env.NEXT_PUBLIC_BASE_URL || 'https://mygpa.vercel.app'}/findmycgpa`,
-        "mainEntity": {
+        name: "CGPA Calculator",
+        description:
+            "Calculate your Cumulative Grade Point Average (CGPA) for PES University. Enter your grades and credits to get your accurate CGPA instantly.",
+        url: `${process.env.NEXT_PUBLIC_BASE_URL || "https://mygpa.vercel.app"}/findmycgpa`,
+        mainEntity: {
             "@type": "SoftwareApplication",
-            "name": "CGPA Calculator",
-            "applicationCategory": "EducationalApplication",
-            "operatingSystem": "Web Browser",
-            "description": "Calculate your Cumulative Grade Point Average (CGPA) for PES University students",
-            "offers": {
+            name: "CGPA Calculator",
+            applicationCategory: "EducationalApplication",
+            operatingSystem: "Web Browser",
+            description: "Calculate your Cumulative Grade Point Average (CGPA) for PES University students",
+            offers: {
                 "@type": "Offer",
-                "price": "0",
-                "priceCurrency": "USD"
-            }
+                price: "0",
+                priceCurrency: "USD",
+            },
         },
-        "breadcrumb": {
+        breadcrumb: {
             "@type": "BreadcrumbList",
-            "itemListElement": [
+            itemListElement: [
                 {
                     "@type": "ListItem",
-                    "position": 1,
-                    "name": "Home",
-                    "item": process.env.NEXT_PUBLIC_BASE_URL || 'https://mygpa.vercel.app'
+                    position: 1,
+                    name: "Home",
+                    item: process.env.NEXT_PUBLIC_BASE_URL || "https://mygpa.vercel.app",
                 },
                 {
                     "@type": "ListItem",
-                    "position": 2,
-                    "name": "CGPA Calculator",
-                    "item": `${process.env.NEXT_PUBLIC_BASE_URL || 'https://mygpa.vercel.app'}/findmycgpa`
-                }
-            ]
-        }
+                    position: 2,
+                    name: "CGPA Calculator",
+                    item: `${process.env.NEXT_PUBLIC_BASE_URL || "https://mygpa.vercel.app"}/findmycgpa`,
+                },
+            ],
+        },
     };
 
     return (
         <>
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-            />
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
             <Menu link1="Home" link2="Find my SGPA" />
             <main className="flex h-screen w-screen touch-pan-x justify-center overflow-hidden">
                 <div className="-z-{2} absolute h-full w-full bg-radial-[ellipse_at_bottom_right] from-violet-600 via-indigo-800 to-gray-900">
