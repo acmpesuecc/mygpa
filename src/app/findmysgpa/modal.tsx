@@ -73,44 +73,47 @@ export default function Modal(props: ModalProps) {
         <Portal newDomNode="modal-portal">
             <div
                 onClick={closeModal}
-                className={`absolute left-0 top-0 flex h-full w-full touch-pan-x items-center justify-center overflow-hidden
-         ${isOpen ? "z-[99999999999]" : "-z-[99999]  "}`}
+                className={`fixed inset-0 flex items-center justify-center transition-opacity duration-300
+        ${isOpen ? "z-40 opacity-100" : "opacity-0 -z-10"}`}
             >
+                {/* Dark Overlay */}
                 <div
-                    className={`delay-400 absolute left-0 top-0 flex h-full w-full items-center justify-center bg-black opacity-0 transition-opacity duration-[1400ms]
-       ${isOpen ? "z-[9999999999] opacity-70" : "-z-[99999]  "}`}
+                    className={`absolute inset-0 bg-black transition-opacity duration-500
+    ${isOpen ? "opacity-70" : "opacity-0"}`}
                 ></div>
 
+                {/* Modal Content */}
                 {isOpen && (
-                    <>
-                        <div
-                            data-aos="flip-left"
-                            data-aos-duration="2000"
-                            data-aos-delay="1800"
-                            className=" absolute z-[99999999999999999] flex h-2/3 
-            w-2/3 justify-center rounded-3xl
-              bg-radial-[ellipse_at_top_left] from-indigo-800 via-indigo-700 to-violet-700"
+                    <div
+                        // Prevent clicks inside the modal from closing it
+                        onClick={(e) => e.stopPropagation()}
+                        data-aos="flip-left"
+                        data-aos-duration="1200"
+                        data-aos-delay="500"
+                        // --- RESPONSIVE REFACTOR ---
+                        className="relative z-50 flex w-11/12 max-w-md flex-col items-center justify-center gap-y-6 rounded-3xl p-8
+            bg-radial-[ellipse_at_top_left] from-indigo-800 via-indigo-700 to-violet-700"
+                    >
+                        <h1
+                            className={`text-center text-3xl text-white md:text-4xl ${spectral.className}`}
+                            style={{ fontWeight: 600 }}
                         >
-                            <h1
-                                className={` mx-auto mt-8 text-3xl text-white  lg:text-5xl ${spectral.className}`}
-                                style={{ fontWeight: 600 }}
-                            >
-                                Your {gpaType} is:
-                            </h1>
-                            <GPAProgress gpa={gpa} openProgress={isOpen} />
+                            Your {gpaType} is:
+                        </h1>
 
-                            <span
-                                className={`absolute mx-auto mt-[120%] flex w-3/4 flex-wrap justify-center  lg:invisible  
-              ${
-                  isOpen
-                      ? "ease opacity-100 transition-opacity delay-1000 duration-1000"
-                      : "ease opacity-0 transition-opacity delay-1000 duration-1000"
-              }`}
-                            >
-                                {message}
-                            </span>
+                        <GPAProgress gpa={gpa} openProgress={isOpen} />
+
+                        <div
+                            className={`flex flex-wrap justify-center text-center 
+            ${
+                isOpen
+                    ? "ease opacity-100 transition-opacity delay-1000 duration-1000"
+                    : "ease opacity-0 transition-opacity delay-1000 duration-1000"
+            }`}
+                        >
+                            {message}
                         </div>
-                    </>
+                    </div>
                 )}
             </div>
         </Portal>
