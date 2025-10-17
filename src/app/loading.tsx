@@ -1,4 +1,4 @@
-import { lato } from "./fonts";
+import { lato } from "@/app/fonts";
 export default function Loading() {
     return (
         <main className="min-w-screen flex min-h-screen touch-none items-center justify-center overflow-hidden">

@@ -2,9 +2,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import "../../styles/menu.css";
+import "@/styles/menu.css";
 import Link from "next/link";
-import { spectral } from "../fonts";
+import { spectral } from "@/app/fonts";
 
 type MenuProps = {
     link1: string;
@@ -18,6 +18,7 @@ function Menu(props: MenuProps) {
         linkerinit = link2.split("").slice(-4);
     }
     let linkertext = "";
+
 
     if (linkerinit && linkerinit.length > 0) {
         for (const char of linkerinit) {

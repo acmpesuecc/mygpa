@@ -1,9 +1,9 @@
 "use client";
-import Portal from "./portal";
+import Portal from "@/components/modal/portal";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { spectral } from "../fonts";
-import GPAProgress from "./progress";
+import { spectral } from "@/app/fonts";
+import GPAProgress from "@/components/modal/progress";
 import { useEffect } from "react";
 
 type ModalProps = {

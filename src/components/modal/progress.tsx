@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { spectral } from "../fonts";
+import { spectral } from "@/app/fonts";
 export default function GPAProgress({ gpa, openProgress }: { gpa: string; openProgress: boolean }) {
     let radius = 0;
     let multiplier = 0;

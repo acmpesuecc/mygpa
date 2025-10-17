@@ -1,8 +1,8 @@
 "use client";
-import Intro from "./intro";
+import Intro from "@/components/landing/intro";
 import { useState, useEffect } from "react";
-import IntroPC from "./intropc";
-import Loading from "./loading";
+import IntroPC from "@/components/landing/intropc";
+import Loading from "@/app/loading";
 function HomePage() {
     const [isSlim, setSlim] = useState(false);
     const updateMedia = () => {

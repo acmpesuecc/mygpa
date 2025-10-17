@@ -1,6 +1,6 @@
 import "@/styles/background.css";
-import Menu from "../findmycgpa/menu";
-import SgpaForm from "./sgpaform";
+import SgpaForm from "@/app/findmysgpa/sgpaform";
+import Menu from "@/components/menu";
 
 function FindMySGPA() {
     const grades = ["S", "A+", "A", "A-", "B+", "B", "C", "D", "E", "F"];
