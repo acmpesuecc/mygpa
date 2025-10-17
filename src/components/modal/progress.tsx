@@ -37,7 +37,7 @@ export default function GPAProgress({ gpa, openProgress }: { gpa: string; openPr
                         <circle
                             className={`text-slate-400`}
                             stroke="currentColor"
-                            stroke-width="4"
+                            strokeWidth="4"
                             cx="50%"
                             cy="50%"
                             r={radius}
@@ -49,8 +49,8 @@ export default function GPAProgress({ gpa, openProgress }: { gpa: string; openPr
                             r={radius}
                             stroke="currentColor"
                             id="robin"
-                            stroke-linecap="round"
-                            stroke-width="4"
+                            strokeLinecap="round"
+                            strokeWidth="4"
                             fill="transparent"
                             className="ease text-white transition-all duration-[1800ms]"
                             strokeDasharray={Math.round(Math.PI * (2 * radius))}
