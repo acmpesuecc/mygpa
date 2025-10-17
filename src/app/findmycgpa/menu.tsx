@@ -59,7 +59,9 @@ function Menu(props: MenuProps) {
 
             <span
                 className={`menu-link menu-link-one z-[199] ${spectral.className} ${
-                    rotation ? "opacity-100 transition-opacity delay-[200ms] duration-700" : "opacity-0 transition-opacity duration-300"
+                    rotation
+                        ? "opacity-100 transition-opacity delay-[200ms] duration-700"
+                        : "opacity-0 transition-opacity duration-300"
                 }`}
                 style={{ fontWeight: 800 }}
             >

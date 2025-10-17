@@ -44,7 +44,7 @@ export default function SgpaForm() {
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        formState: {},
         control,
         setError,
     } = useForm<Fields>({

@@ -2,7 +2,6 @@
 import Intro from "./intro";
 import { useState, useEffect } from "react";
 import IntroPC from "./intropc";
-import Loading from "./loading";
 function HomePage() {
     const [isSlim, setSlim] = useState(false);
     const [mounted, setMounted] = useState(false);
@@ -25,11 +24,7 @@ function HomePage() {
 
     return (
         <main className="min-w-screen min-h-screen touch-pan-x overflow-hidden">
-            {isSlim ? (
-                <Intro welcome="Welcome to MyGPA." />
-            ) : (
-                <IntroPC welcome="Welcome to MyGPA." />
-            )}
+            {isSlim ? <Intro welcome="Welcome to MyGPA." /> : <IntroPC welcome="Welcome to MyGPA." />}
         </main>
     );
 }

@@ -24,7 +24,7 @@ export default function CgpaForm() {
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        formState: {},
         control,
     } = useForm<Fields>();
 
