@@ -1,7 +1,7 @@
 import React from "react";
 import IntroShared from "@/components/landing/intro-shared";
 
-export default function IntroPC({ welcome }: { welcome: string}) {
+export default function IntroPC({ welcome }: { welcome: string }) {
     return (
         <IntroShared
             welcome={welcome}

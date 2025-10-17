@@ -19,7 +19,6 @@ function Menu(props: MenuProps) {
     }
     let linkertext = "";
 
-
     if (linkerinit && linkerinit.length > 0) {
         for (const char of linkerinit) {
             if (char) {
