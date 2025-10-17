@@ -161,7 +161,7 @@ export default function CgpaForm() {
                                 CREDITS
                             </h1>
                         </span>
-                        <span className="relative mt-6 block flex w-full justify-center lg:mt-8" ref={semesterRef}>
+                        <span className="relative mt-6 flex w-full justify-center lg:mt-8" ref={semesterRef}>
                             <input
                                 data-aos="flip-down"
                                 data-aos-duration="2000"
@@ -170,14 +170,14 @@ export default function CgpaForm() {
                                 placeholder="Total credits"
                                 min="0"
                                 step="1"
-                                {...register(`semesters.0.credits` as const, {
+                                {...register("semesters.0.credits" as const, {
                                     required: "Please enter semester credits",
                                 })}
                                 className={`h-8 w-4/5 lg:h-10 lg:w-full ${spectral.className} relative rounded-xl text-center bg-white`}
                             />
                         </span>
                         {fields.slice(1, semesterNumber).map((semester, index) => (
-                            <span key={index + 1} className="relative mt-4 block flex w-full justify-center lg:mt-8">
+                            <span key={index + 1} className="relative mt-4 flex w-full justify-center lg:mt-8">
                                 <input
                                     type="number"
                                     placeholder="Total credits"
@@ -215,7 +215,7 @@ export default function CgpaForm() {
                                 SGPA
                             </h1>
                         </span>
-                        <span ref={semesterRef} className="relative mt-6 block flex w-full justify-center lg:mt-8">
+                        <span ref={semesterRef} className="relative mt-6 flex w-full justify-center lg:mt-8">
                             <input
                                 data-aos="flip-down"
                                 data-aos-duration="2000"
@@ -232,7 +232,7 @@ export default function CgpaForm() {
                             />
                         </span>
                         {fields.slice(1, semesterNumber).map((semester, index) => (
-                            <span key={index + 1} className="relative mt-4 block flex w-full justify-center lg:mt-8">
+                            <span key={index + 1} className="relative mt-4 flex w-full justify-center lg:mt-8">
                                 <input
                                     type="number"
                                     placeholder="SGPA"

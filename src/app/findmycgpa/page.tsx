@@ -1,3 +1,4 @@
+"use client";
 import "@/styles/background.css";
 import CgpaForm from "./cgpaform";
 import Menu from "./menu";

@@ -167,11 +167,11 @@ export default function SgpaForm() {
         >
             <Modal toggle={toggleModal} isOpen={modalIsOpen} gpaType="SGPA" gpa={sgpa} />
             <form onSubmit={handleSubmit(onCalc)} className="flex h-full w-full justify-center">
-                <span className="flex w-full flex-wrap justify-between">
-                    <div ref={courseTitles} className="mb-4 max-w-[30%] ">
+                <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6 lg:gap-8">
+                    <div ref={courseTitles} className="mb-4">
                         <span ref={courseRef}>
                             <h1
-                                className={`ml-1 text-2xl text-white lg:ml-6 lg:text-5xl ${poppins.className}`}
+                                className={`text-center text-2xl text-white lg:text-5xl ${poppins.className}`}
                                 data-aos="fade-down"
                                 data-aos-duration="1800"
                             >
@@ -196,7 +196,7 @@ export default function SgpaForm() {
                                 {...register(`courses.0.title` as const, {
                                     required: "Please enter course title",
                                 })}
-                                className={`h-8 w-4/5 lg:h-10 lg:w-full ${spectral.className} relative mb-3 mt-4 rounded-xl text-center lg:my-6 bg-white`}
+                                className={`h-8 w-full max-w-[300px] sm:max-w-none lg:h-10 ${spectral.className} relative mb-3 mt-4 rounded-xl text-center lg:my-6 bg-white`}
                             />
                         </span>
 
@@ -217,12 +217,12 @@ export default function SgpaForm() {
                         ))}
                         <div data-aos="fade-right" data-aos-duration="1400" data-aos-delay="2400" ref={calcscope}>
                             <button
-                                className="calcbutton hover:cursor-pointer mx-auto flex w-[95%] justify-center rounded-full bg-gradient-to-br from-purple-800 to-pink-500 shadow-2xl lg:w-[85%]"
+                                className="calcbutton hover:cursor-pointer mx-auto flex w-full max-w-[300px] sm:max-w-none justify-center rounded-full bg-gradient-to-br from-purple-800 to-pink-500 shadow-2xl transition-transform hover:scale-105"
                                 onClick={handleCalcClick}
                                 type="submit"
                             >
                                 <span
-                                    className={` text-sm font-extrabold text-white ${lato.className} px-5 py-2 lg:p-2 lg:text-lg`}
+                                    className={`text-sm font-extrabold text-white ${lato.className} px-4 py-2.5 sm:px-5 lg:px-6 lg:py-3 lg:text-lg`}
                                 >
                                     Calculate SGPA
                                 </span>
@@ -231,7 +231,7 @@ export default function SgpaForm() {
 
                         <ToastContainer />
                     </div>
-                    <div ref={creditsFields} className="mb-4 max-w-[30%]">
+                    <div ref={creditsFields} className="mb-4">
                         <span className="flex justify-center" ref={courseRef}>
                             <h1
                                 className={`text-2xl text-white lg:text-5xl ${poppins.className}`}
@@ -241,7 +241,7 @@ export default function SgpaForm() {
                                 CREDITS
                             </h1>
                         </span>
-                        <span className="relative mt-6 block flex w-full justify-center lg:mt-8" ref={courseRef}>
+                        <span className="relative mt-6 flex w-full justify-center lg:mt-8" ref={courseRef}>
                             <select
                                 data-aos="flip-down"
                                 data-aos-duration="2000"
@@ -264,7 +264,7 @@ export default function SgpaForm() {
                             </select>
                         </span>
                         {fields.slice(1, courseNumber).map((course, index) => (
-                            <span key={index + 1} className="relative mt-4 block flex w-full justify-center lg:mt-8">
+                            <span key={index + 1} className="relative mt-4 flex w-full justify-center lg:mt-8">
                                 <select
                                     {...register(`courses.${index + 1}.credits` as const, {
                                         required: "Please enter course credits",
@@ -287,13 +287,12 @@ export default function SgpaForm() {
                         <div data-aos="fade-up" data-aos-duration="1400" data-aos-delay="2400" ref={addscope}>
                             <button
                                 onClick={addCourse}
-                                className="addbutton hover:cursor-pointer mt-5 flex w-full justify-center rounded-full bg-gradient-to-br from-cyan-600 from-20% to-green-400 lg:mt-9"
+                                className="addbutton hover:cursor-pointer mt-5 flex w-full max-w-[300px] sm:max-w-none justify-center rounded-full bg-gradient-to-br from-cyan-600 from-20% to-green-400 transition-transform hover:scale-105 lg:mt-9"
                             >
                                 <span
-                                    className={` text-center text-sm font-extrabold text-white lg:flex lg:flex-row ${lato.className} px-8 py-2 lg:px-0 lg:text-lg`}
+                                    className={`text-center text-sm font-extrabold text-white flex flex-row items-center ${lato.className} px-4 py-2.5 sm:px-5 lg:px-6 lg:py-3 lg:text-lg`}
                                 >
-                                    <p> Add&nbsp;</p>
-                                    <p>course</p>
+                                    Add course
                                 </span>
                             </button>
                         </div>
@@ -309,7 +308,7 @@ export default function SgpaForm() {
                                 GRADE
                             </h1>
                         </span>
-                        <span ref={courseRef} className="relative mt-6 block flex w-full justify-center lg:mt-8">
+                        <span ref={courseRef} className="relative mt-6 flex w-full justify-center lg:mt-8">
                             <select
                                 data-aos="flip-down"
                                 data-aos-duration="2000"
@@ -327,7 +326,7 @@ export default function SgpaForm() {
                             </select>
                         </span>
                         {fields.slice(1, courseNumber).map((course, index) => (
-                            <span key={index + 1} className="relative mt-4 block flex w-full justify-center lg:mt-8">
+                            <span key={index + 1} className="relative mt-4 flex w-full justify-center lg:mt-8">
                                 <select
                                     {...register(`courses.${index + 1}.grade` as const, {
                                         required: "Please enter a grade",
@@ -355,7 +354,7 @@ export default function SgpaForm() {
                             </button>
                         </div>
                     </div>
-                </span>
+                </div>
             </form>
         </div>
     );
