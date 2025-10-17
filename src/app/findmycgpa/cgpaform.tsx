@@ -6,7 +6,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { useAnimate } from "motion/react";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
-import Modal from "../findmysgpa/modal";
+import Modal from "@/components/modal/modal";
 
 type Fields = {
     semesters: {
@@ -24,7 +24,6 @@ export default function CgpaForm() {
     const {
         register,
         handleSubmit,
-        formState: { errors },
         control,
     } = useForm<Fields>();
 
@@ -161,7 +160,7 @@ export default function CgpaForm() {
                                 CREDITS
                             </h1>
                         </span>
-                        <span className="relative mt-6 block flex w-full justify-center lg:mt-8" ref={semesterRef}>
+                        <span className="relative mt-6 flex w-full justify-center lg:mt-8" ref={semesterRef}>
                             <input
                                 data-aos="flip-down"
                                 data-aos-duration="2000"

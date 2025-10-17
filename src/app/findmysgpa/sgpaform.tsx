@@ -8,7 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useAnimate } from "motion/react";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
-import Modal from "./modal";
+import Modal from "@/components/modal/modal";
 
 type Fields = {
     courses: {
@@ -44,7 +44,6 @@ export default function SgpaForm() {
     const {
         register,
         handleSubmit,
-        formState: { errors },
         control,
         setError,
     } = useForm<Fields>({
