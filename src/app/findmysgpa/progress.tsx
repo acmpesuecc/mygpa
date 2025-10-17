@@ -1,7 +1,9 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { spectral } from "../fonts";
+
 export default function GPAProgress({ gpa, openProgress }: { gpa: string; openProgress: boolean }) {
+    // Use local variables for radius and multiplier for instant responsiveness
     let radius = 0;
     let multiplier = 0;
     if (window.innerWidth < 900) {
@@ -11,8 +13,18 @@ export default function GPAProgress({ gpa, openProgress }: { gpa: string; openPr
         radius = 140;
         multiplier = 880;
     }
+
     const [showGPA, setShowGPA] = useState(false);
+
     useEffect(() => {
+        if (!openProgress) {
+            setShowGPA(false);
+            const element = document.getElementById("robin");
+            if (element) {
+                element.style.strokeDashoffset = `${Math.round(Math.PI * (2 * radius))}`;
+            }
+            return;
+        }
         const draw = () => {
             const element = document.getElementById("robin");
             const number = document.getElementById("robin1");
@@ -24,40 +36,39 @@ export default function GPAProgress({ gpa, openProgress }: { gpa: string; openPr
                 setShowGPA(true);
             }, 1800);
         };
-        setTimeout(draw, 4000);
+        const drawTimer = setTimeout(draw, 4000);
+        return () => {
+            clearTimeout(drawTimer);
+        };
     }, [openProgress, gpa, multiplier, radius]);
+
     return (
-        <div
-            className={`absolute z-[999999] flex w-full select-none flex-col items-center
-       justify-center lg:pt-16`}
-        >
+        <div className="flex w-full select-none flex-col items-center justify-center lg:pt-16">
             {openProgress && (
-                <>
-                    <svg className="relative z-[2] flex h-96 w-96 -rotate-90 transform items-center justify-center">
-                        <circle
-                            className={`text-slate-400`}
-                            stroke="currentColor"
-                            stroke-width="4"
-                            cx="50%"
-                            cy="50%"
-                            r={radius}
-                            fill="transparent"
-                        />
-                        <circle
-                            cx="50%"
-                            cy="50%"
-                            r={radius}
-                            stroke="currentColor"
-                            id="robin"
-                            stroke-linecap="round"
-                            stroke-width="4"
-                            fill="transparent"
-                            className="ease text-white transition-all duration-[1800ms]"
-                            strokeDasharray={Math.round(Math.PI * (2 * radius))}
-                            strokeDashoffset={Math.round(Math.PI * (2 * radius))}
-                        />
-                    </svg>
-                </>
+                <svg className="relative z-[2] flex h-96 w-96 -rotate-90 transform items-center justify-center">
+                    <circle
+                        className="text-slate-400"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                        cx="50%"
+                        cy="50%"
+                        r={radius}
+                        fill="transparent"
+                    />
+                    <circle
+                        cx="50%"
+                        cy="50%"
+                        r={radius}
+                        stroke="currentColor"
+                        id="robin"
+                        strokeLinecap="round"
+                        strokeWidth="4"
+                        fill="transparent"
+                        className="ease text-white transition-all duration-[1800ms]"
+                        strokeDasharray={Math.round(Math.PI * (2 * radius))}
+                        strokeDashoffset={Math.round(Math.PI * (2 * radius))}
+                    />
+                </svg>
             )}
             <span
                 className={`ease text-bold absolute z-[9999999999] text-5xl text-white opacity-0 transition-all duration-[2000ms] lg:text-6xl ${
@@ -65,7 +76,7 @@ export default function GPAProgress({ gpa, openProgress }: { gpa: string; openPr
                 } ${showGPA ? "opacity-100" : ""}`}
                 id="robin1"
             >
-                {gpa}
+                {parseFloat(gpa || "0").toFixed(2)}
             </span>
         </div>
     );

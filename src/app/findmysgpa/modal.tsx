@@ -7,121 +7,117 @@ import GPAProgress from "./progress";
 import { useEffect } from "react";
 
 type ModalProps = {
-  toggle: () => void;
-  isOpen: boolean;
-  gpaType: string;
-  gpa: string;
+    toggle: () => void;
+    isOpen: boolean;
+    gpaType: string;
+    gpa: string;
 };
 
 export default function Modal(props: ModalProps) {
-  const { toggle, isOpen, gpaType, gpa } = props;
+    const { toggle, isOpen, gpaType, gpa } = props;
+    const floatgpa = parseFloat(gpa) || 0;
 
-  const floatgpa = parseFloat(gpa);
-  let message = <div></div>;
+    let message = <div></div>;
+    switch (true) {
+        case floatgpa > 9:
+            message = (
+                <>
+                    <p className={`text-lg text-white ${spectral.className} text-center`}>Congratulations!</p>
+                    <p className={`text-center text-lg text-white ${spectral.className} mx-auto`}>
+                        You have achieved an outstanding academic performance!
+                    </p>
+                </>
+            );
+            break;
+        case floatgpa > 8:
+            message = (
+                <>
+                    <p className={`text-lg text-white ${spectral.className} text-center`}>
+                        Congratulations on achieving an impressive GPA! Your hard work has truly paid off. Well done!
+                    </p>
+                </>
+            );
+            break;
+        case floatgpa > 6:
+            message = (
+                <>
+                    <p className={`text-lg text-white ${spectral.className} text-center`}>
+                        Impressive! Your academic progress is noteworthy, and there is potential for excellence in future
+                        endeavors.
+                    </p>
+                </>
+            );
+            break;
+        default:
+            message = (
+                <>
+                    <p className={`text-lg text-white ${spectral.className} text-center`}>
+                        Amid challenges, your dedication stands strong. Each hurdle is a stepping stone to your future success.
+                        Keep going!
+                    </p>
+                </>
+            );
+            break;
+    }
 
-  switch (true) {
-    case floatgpa > 9:
-      message = (
-        <>
-          <p className={`text-lg text-white ${spectral.className} text-center`}>
-            Congratulations!
-          </p>
-          <p
-            className={`text-center text-white text-lg ${spectral.className} mt-1`}
-          >
-            You have achieved an outstanding academic performance!
-          </p>
-        </>
-      );
-      break;
-    case floatgpa > 8:
-      message = (
-        <p
-          className={`text-center text-white text-lg ${spectral.className} mt-1`}
-        >
-          Congratulations on achieving an impressive GPA! Your hard work has truly paid off.
-        </p>
-      );
-      break;
-    case floatgpa > 6:
-      message = (
-        <p
-          className={`text-center text-white text-lg ${spectral.className} mt-1`}
-        >
-          Impressive! Your academic progress is noteworthy. Keep aiming higher!
-        </p>
-      );
-      break;
-    default:
-      message = (
-        <p
-          className={`text-center text-white text-lg ${spectral.className} mt-1`}
-        >
-          Challenges shape champions. Keep striving forward — success awaits!
-        </p>
-      );
-  }
+    const closeModal = () => {
+        toggle();
+    };
 
-  const closeModal = () => toggle();
+    useEffect(() => {
+        AOS.init({
+            easing: "ease",
+            once: false,
+        });
+        if (isOpen) {
+            AOS.refresh();
+        }
+    }, [isOpen]);
 
-  useEffect(() => {
-    AOS.init({
-      easing: "ease",
-      once: false,
-    });
-  }, [isOpen]);
-
-  return (
-    <Portal newDomNode="modal-portal">
-      <div
-        onClick={closeModal}
-        className={`fixed inset-0 flex items-center justify-center transition-opacity duration-300 ${
-          isOpen ? "z-40 opacity-100" : "-z-10 opacity-0"
-        }`}
-      >
-        {/* Background Overlay */}
-        <div
-          className={`absolute inset-0 bg-black transition-opacity duration-500 ${
-            isOpen ? "opacity-70" : "opacity-0"
-          }`}
-        ></div>
-
-        {/* Modal */}
-        {isOpen && (
-          <div
-            onClick={(e) => e.stopPropagation()}
-            data-aos="zoom-in"
-            data-aos-duration="800"
-            className="relative z-50 flex flex-col items-center justify-center w-11/12 max-w-sm gap-y-4 rounded-3xl px-6 py-8 
-            bg-gradient-to-b from-indigo-700 via-indigo-800 to-violet-800 shadow-2xl"
-          >
-            {/* Title */}
-            <h1
-              className={`text-center text-3xl md:text-4xl text-white font-semibold ${spectral.className}`}
-            >
-              Your {gpaType} is:
-            </h1>
-
-            {/* GPA Value in Circle */}
-            <div className="flex items-center justify-center w-40 h-40 rounded-full border-4 border-white text-white">
-              <p
-                className={`text-5xl md:text-6xl font-bold ${spectral.className}`}
-              >
-                {gpa}
-              </p>
-            </div>
-
-            {/* Message */}
+    return (
+        <Portal newDomNode="modal-portal">
             <div
-              className={`text-center transition-opacity duration-1000 ${
-                isOpen ? "opacity-100 delay-500" : "opacity-0"
-              }`}
+                onClick={closeModal}
+                className={`fixed inset-0 flex items-center justify-center transition-opacity duration-300 ${
+                    isOpen ? "z-[99999999999]" : "-z-[99999] opacity-0"
+                }`}
+                aria-modal="true"
+                role="dialog"
             >
-              {message}
+                <div
+                    className={`delay-400 absolute inset-0 bg-black opacity-0 transition-opacity duration-[1400ms] ${
+                        isOpen ? "z-[9999999999] opacity-70" : "-z-[99999]"
+                    }`}
+                    aria-hidden="true"
+                ></div>
+
+                {isOpen && (
+                    <div
+                        data-aos="flip-left"
+                        data-aos-duration="2000"
+                        data-aos-delay="1800"
+                        className="relative z-[99999999999999999] flex  max-w-xs w-full flex-col items-center justify-center gap-y-2 rounded-3xl p-6 pt-8 shadow-xl bg-radial-[ellipse_at_top_left] from-indigo-800 via-indigo-700 to-violet-700"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <h1
+                            className={`text-center mx-auto mt-2 text-3xl text-white lg:text-5xl ${spectral.className}`}
+                            style={{ fontWeight: 600 }}
+                        >
+                            Your {gpaType} is:
+                        </h1>
+                        <GPAProgress gpa={gpa} openProgress={isOpen} />
+                        <div
+                            className={`text-center ${
+                                isOpen
+                                    ? "ease opacity-100 transition-opacity delay-1000 duration-1000"
+                                    : "ease opacity-0 transition-opacity delay-1000 duration-1000"
+                            }`}
+                        >
+                            {message}
+                        </div>
+                    </div>
+                )}
             </div>
-          </div>
-        )}
-      </div>
-    </Portal>
-  );
+        </Portal>
+    );
 }
