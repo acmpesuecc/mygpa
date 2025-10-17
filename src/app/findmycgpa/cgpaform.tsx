@@ -26,7 +26,13 @@ export default function CgpaForm() {
         handleSubmit,
         formState: { errors },
         control,
-    } = useForm<Fields>();
+        setValue,
+        watch,
+    } = useForm<Fields>({
+        defaultValues: {
+            semesters: [{ credits: null, sgpa: null }],
+        },
+    });
 
     const [semesterNumber, setSemesterNumber] = useState(1);
     const [semesterTitles] = useAutoAnimate<HTMLDivElement>();
@@ -38,6 +44,9 @@ export default function CgpaForm() {
         control,
         name: "semesters",
     });
+
+    // Watch form values to save to localStorage
+    const formValues = watch();
 
     const handleCalcClick = async () => {
         await calcanimate([
@@ -87,6 +96,49 @@ export default function CgpaForm() {
         toggleModal();
         setCgpa((numerator / totalcredits).toFixed(2));
     };
+
+    useEffect(() => {
+        const savedData = localStorage.getItem("cgpaFormData");
+        const savedSemesterCount = localStorage.getItem("cgpaSemesterCount");
+
+        if (savedData) {
+            try {
+                const parsedData = JSON.parse(savedData);
+                const semesterCount = savedSemesterCount ? parseInt(savedSemesterCount) : 1;
+
+                // Set semester count
+                setSemesterNumber(semesterCount);
+
+                // Populate the fields array with saved semesters
+                if (parsedData.semesters && parsedData.semesters.length > 0) {
+                    // Add additional semesters if needed
+                    for (let i = 1; i < semesterCount; i++) {
+                        if (i >= fields.length) {
+                            append({ credits: null, sgpa: null });
+                        }
+                    }
+
+                    // Set values for each semester
+                    parsedData.semesters.forEach((semester: Fields["semesters"][number], index: number) => {
+                        if (index < semesterCount) {
+                            setValue(`semesters.${index}.credits`, semester.credits);
+                            setValue(`semesters.${index}.sgpa`, semester.sgpa);
+                        }
+                    });
+                }
+            } catch (error) {
+                console.error("Error loading CGPA data from localStorage:", error);
+            }
+        }
+    }, []);
+
+    // Save form data to localStorage whenever it changes
+    useEffect(() => {
+        if (formValues.semesters && formValues.semesters.length > 0) {
+            localStorage.setItem("cgpaFormData", JSON.stringify(formValues));
+            localStorage.setItem("cgpaSemesterCount", semesterNumber.toString());
+        }
+    }, [formValues, semesterNumber]);
 
     useEffect(() => {
         AOS.init({
