@@ -24,7 +24,7 @@ export default function SgpaForm() {
     const [addscope, addanimate] = useAnimate();
     const [rmscope, rmanimate] = useAnimate();
     const [modalIsOpen, setModalIsOpen] = useState(false);
-    const [sgpa, setSgpa] = useState("");
+    const [sgpa, setSGPA] = useState("");
     const handleCalcClick = async () => {
         await calcanimate([
             [".calcbutton", { scale: 0.9 }, { duration: 0.2 }],
@@ -41,12 +41,16 @@ export default function SgpaForm() {
         E: 5,
         F: 0,
     };
+
     const {
         register,
         handleSubmit,
         formState: { errors },
         control,
         setError,
+        setValue,
+        watch,
+        reset,
     } = useForm<Fields>({
         defaultValues: {
             courses: [
@@ -58,6 +62,8 @@ export default function SgpaForm() {
             ],
         },
     });
+
+    const formValues = watch();
 
     const toggleModal = () => {
         setModalIsOpen(!modalIsOpen);
@@ -110,7 +116,7 @@ export default function SgpaForm() {
             toggleModal();
             console.log((numerator / totalcredits).toFixed(2));
 
-            setSgpa((numerator / totalcredits).toFixed(2));
+            setSGPA((numerator / totalcredits).toFixed(2));
             return;
         } else {
             return;
@@ -148,6 +154,31 @@ export default function SgpaForm() {
             [".rmbutton", { scale: 1 }, { duration: 0.2 }],
         ]);
     };
+
+    useEffect(() => {
+        if (typeof window === "undefined") return;
+        const savedData = localStorage.getItem("sgpaFormData");
+        const savedCourseCount = localStorage.getItem("sgpaCourseCount");
+        if (savedData) {
+            try {
+                const parsed = JSON.parse(savedData);
+                if (parsed && Array.isArray(parsed.courses)) {
+                    reset({ courses: parsed.courses });
+                    setCourseNumber(parsed.courses.length);
+                }
+            } catch {}
+        } else if (savedCourseCount) {
+            setCourseNumber(parseInt(savedCourseCount));
+        }
+    }, [reset]);
+
+    // Save SGPA form data to localStorage
+    useEffect(() => {
+        if (formValues.courses && formValues.courses.length > 0) {
+            localStorage.setItem("sgpaFormData", JSON.stringify(formValues));
+            localStorage.setItem("sgpaCourseCount", courseNumber.toString());
+        }
+    }, [formValues, courseNumber]);
 
     useEffect(() => {
         AOS.init({

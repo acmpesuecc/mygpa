@@ -26,18 +26,26 @@ export default function CgpaForm() {
         handleSubmit,
         formState: { errors },
         control,
-    } = useForm<Fields>();
+        setValue,
+        watch,
+        reset,
+    } = useForm<Fields>({
+        defaultValues: { semesters: [{ credits: null, sgpa: null }] },
+    });
 
     const [semesterNumber, setSemesterNumber] = useState(1);
     const [semesterTitles] = useAutoAnimate<HTMLDivElement>();
     const [creditsFields] = useAutoAnimate<HTMLDivElement>();
     const [sgpaFields] = useAutoAnimate<HTMLDivElement>();
     const [modalIsOpen, setModalIsOpen] = useState(false);
-    const [cgpa, setCgpa] = useState("");
+    const [cgpa, setCGPA] = useState("");
     const { fields, append, remove } = useFieldArray({
         control,
         name: "semesters",
     });
+
+    // Watch form values to save to localStorage
+    const formValues = watch();
 
     const handleCalcClick = async () => {
         await calcanimate([
@@ -85,8 +93,34 @@ export default function CgpaForm() {
             }
         });
         toggleModal();
-        setCgpa((numerator / totalcredits).toFixed(2));
+        setCGPA((numerator / totalcredits).toFixed(2));
     };
+
+    useEffect(() => {
+        if (typeof window === "undefined") return;
+        const savedData = localStorage.getItem("cgpaFormData");
+        const savedSemesterCount = localStorage.getItem("cgpaSemesterCount");
+        if (savedData) {
+            try {
+                const parsed = JSON.parse(savedData);
+                if (parsed && Array.isArray(parsed.semesters)) {
+                    reset({ semesters: parsed.semesters });
+                    setSemesterNumber(parsed.courses.length);
+                }
+            } catch {}
+        }
+        if (savedSemesterCount) {
+            setSemesterNumber(parseInt(savedSemesterCount));
+        }
+    }, [reset]);
+
+    // Save form data to localStorage whenever it changes
+    useEffect(() => {
+        if (formValues.semesters && formValues.semesters.length > 0) {
+            localStorage.setItem("cgpaFormData", JSON.stringify(formValues));
+            localStorage.setItem("cgpaSemesterCount", semesterNumber.toString());
+        }
+    }, [formValues, semesterNumber]);
 
     useEffect(() => {
         AOS.init({
