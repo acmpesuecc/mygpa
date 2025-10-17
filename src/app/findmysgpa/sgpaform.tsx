@@ -24,7 +24,7 @@ export default function SgpaForm() {
     const [addscope, addanimate] = useAnimate();
     const [rmscope, rmanimate] = useAnimate();
     const [modalIsOpen, setModalIsOpen] = useState(false);
-    const [sgpa, setSgpa] = useState("");
+    const [sgpa, setSGPA] = useState("");
     const handleCalcClick = async () => {
         await calcanimate([
             [".calcbutton", { scale: 0.9 }, { duration: 0.2 }],
@@ -41,6 +41,7 @@ export default function SgpaForm() {
         E: 5,
         F: 0,
     };
+
     const {
         register,
         handleSubmit,
@@ -49,6 +50,7 @@ export default function SgpaForm() {
         setError,
         setValue,
         watch,
+        reset,
     } = useForm<Fields>({
         defaultValues: {
             courses: [
@@ -114,7 +116,7 @@ export default function SgpaForm() {
             toggleModal();
             console.log((numerator / totalcredits).toFixed(2));
 
-            setSgpa((numerator / totalcredits).toFixed(2));
+            setSGPA((numerator / totalcredits).toFixed(2));
             return;
         } else {
             return;
@@ -154,35 +156,21 @@ export default function SgpaForm() {
     };
 
     useEffect(() => {
+        if (typeof window === "undefined") return;
         const savedData = localStorage.getItem("sgpaFormData");
         const savedCourseCount = localStorage.getItem("sgpaCourseCount");
         if (savedData) {
             try {
-                const parsedData = JSON.parse(savedData);
-                const courseCount = savedCourseCount ? parseInt(savedCourseCount) : 1;
-                setCourseNumber(courseCount);
-
-                // Add additional courses if needed
-                if (parsedData.courses && parsedData.courses.length > 0) {
-                    for (let i = 1; i < courseCount; i++) {
-                        if (i >= fields.length) {
-                            append({ title: null, credits: 1, grade: Object.keys(gradeObjects)[0] });
-                        }
-                    }
-                    // Set values for each course
-                    parsedData.courses.forEach((course: Fields["courses"][number], index: number) => {
-                        if (index < courseCount) {
-                            setValue(`courses.${index}.title`, course.title);
-                            setValue(`courses.${index}.credits`, course.credits);
-                            setValue(`courses.${index}.grade`, course.grade);
-                        }
-                    });
+                const parsed = JSON.parse(savedData);
+                if (parsed && Array.isArray(parsed.courses)) {
+                    reset({ courses: parsed.courses });
+                    setCourseNumber(parsed.courses.length);
                 }
-            } catch (error) {
-                console.error("Error loading SGPA data from localStorage:", error);
-            }
+            } catch {}
+        } else if (savedCourseCount) {
+            setCourseNumber(parseInt(savedCourseCount));
         }
-    }, []);
+    }, [reset]);
 
     // Save SGPA form data to localStorage
     useEffect(() => {

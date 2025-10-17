@@ -28,10 +28,9 @@ export default function CgpaForm() {
         control,
         setValue,
         watch,
+        reset,
     } = useForm<Fields>({
-        defaultValues: {
-            semesters: [{ credits: null, sgpa: null }],
-        },
+        defaultValues: { semesters: [{ credits: null, sgpa: null }] },
     });
 
     const [semesterNumber, setSemesterNumber] = useState(1);
@@ -39,7 +38,7 @@ export default function CgpaForm() {
     const [creditsFields] = useAutoAnimate<HTMLDivElement>();
     const [sgpaFields] = useAutoAnimate<HTMLDivElement>();
     const [modalIsOpen, setModalIsOpen] = useState(false);
-    const [cgpa, setCgpa] = useState("");
+    const [cgpa, setCGPA] = useState("");
     const { fields, append, remove } = useFieldArray({
         control,
         name: "semesters",
@@ -94,43 +93,26 @@ export default function CgpaForm() {
             }
         });
         toggleModal();
-        setCgpa((numerator / totalcredits).toFixed(2));
+        setCGPA((numerator / totalcredits).toFixed(2));
     };
 
     useEffect(() => {
+        if (typeof window === "undefined") return;
         const savedData = localStorage.getItem("cgpaFormData");
         const savedSemesterCount = localStorage.getItem("cgpaSemesterCount");
-
         if (savedData) {
             try {
-                const parsedData = JSON.parse(savedData);
-                const semesterCount = savedSemesterCount ? parseInt(savedSemesterCount) : 1;
-
-                // Set semester count
-                setSemesterNumber(semesterCount);
-
-                // Populate the fields array with saved semesters
-                if (parsedData.semesters && parsedData.semesters.length > 0) {
-                    // Add additional semesters if needed
-                    for (let i = 1; i < semesterCount; i++) {
-                        if (i >= fields.length) {
-                            append({ credits: null, sgpa: null });
-                        }
-                    }
-
-                    // Set values for each semester
-                    parsedData.semesters.forEach((semester: Fields["semesters"][number], index: number) => {
-                        if (index < semesterCount) {
-                            setValue(`semesters.${index}.credits`, semester.credits);
-                            setValue(`semesters.${index}.sgpa`, semester.sgpa);
-                        }
-                    });
+                const parsed = JSON.parse(savedData);
+                if (parsed && Array.isArray(parsed.semesters)) {
+                    reset({ semesters: parsed.semesters });
+                    setSemesterNumber(parsed.courses.length);
                 }
-            } catch (error) {
-                console.error("Error loading CGPA data from localStorage:", error);
-            }
+            } catch {}
         }
-    }, []);
+        if (savedSemesterCount) {
+            setSemesterNumber(parseInt(savedSemesterCount));
+        }
+    }, [reset]);
 
     // Save form data to localStorage whenever it changes
     useEffect(() => {
