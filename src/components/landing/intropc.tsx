@@ -14,3 +14,4 @@ export default function IntroPC({ welcome }: { welcome: string }) {
         />
     );
 }
+
