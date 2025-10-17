@@ -5,33 +5,32 @@ import IntroPC from "./intropc";
 import Loading from "./loading";
 function HomePage() {
     const [isSlim, setSlim] = useState(false);
-    const updateMedia = () => {
-        if (typeof window !== null && window.innerWidth < 1024) {
-            setSlim(true);
-        }
-    };
+    const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
-        updateMedia();
-        window.addEventListener("resize", updateMedia);
-        return () => window.removeEventListener("resize", updateMedia);
+        setMounted(true);
+        if (typeof window !== "undefined") {
+            const updateMedia = () => {
+                setSlim(window.innerWidth < 1024);
+            };
+            updateMedia();
+            window.addEventListener("resize", updateMedia);
+            return () => window.removeEventListener("resize", updateMedia);
+        }
     }, []);
+
+    if (!mounted) {
+        return <main className="min-w-screen min-h-screen touch-pan-x overflow-hidden"></main>;
+    }
+
     return (
-        <>
-            <main className="min-w-screen min-h-screen touch-pan-x overflow-hidden">
-                {typeof window !== "undefined" ? (
-                    isSlim ? (
-                        <Intro welcome="Welcome to MyGPA." />
-                    ) : (
-                        <IntroPC welcome="Welcome to MyGPA." />
-                    )
-                ) : (
-                    <>
-                        <Loading />
-                    </>
-                )}
-            </main>
-        </>
+        <main className="min-w-screen min-h-screen touch-pan-x overflow-hidden">
+            {isSlim ? (
+                <Intro welcome="Welcome to MyGPA." />
+            ) : (
+                <IntroPC welcome="Welcome to MyGPA." />
+            )}
+        </main>
     );
 }
 

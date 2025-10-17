@@ -58,20 +58,18 @@ function Menu(props: MenuProps) {
             </div>
 
             <span
-                className={`absolute left-[4.5vw] top-[4vh] z-[199] -rotate-[48deg] text-xl text-black lg:left-[2.5vw] lg:top-[9vh] lg:text-4xl
-         ${spectral.className} ${
-             rotation ? "opacity-100 transition-all delay-[200ms] duration-[1600ms]" : " opacity-0 transition-all duration-500"
-         }`}
+                className={`menu-link menu-link-one z-[199] ${spectral.className} ${
+                    rotation ? "opacity-100 transition-opacity delay-[200ms] duration-700" : "opacity-0 transition-opacity duration-300"
+                }`}
                 style={{ fontWeight: 800 }}
             >
                 {rotation && <Link href="../">{link1}</Link>}
             </span>
 
             <span
-                className={`absolute left-[8vw] top-[10vh] z-[199] -rotate-[48deg] text-xl text-black lg:left-[5vw] lg:top-[23vh] lg:text-4xl
-         ${spectral.className} ${
-             rotation ? " opacity-100 transition-all duration-[2000ms] " : "opacity-0 transition-all duration-300"
-         }`}
+                className={`menu-link menu-link-two z-[199] ${spectral.className} ${
+                    rotation ? "opacity-100 transition-opacity duration-900" : "opacity-0 transition-opacity duration-300"
+                }`}
                 style={{ fontWeight: 800 }}
             >
                 {rotation && <Link href={`../findmy${linkertext}`}> {link2}</Link>}
@@ -79,14 +77,14 @@ function Menu(props: MenuProps) {
 
             <nav
                 id="nav"
-                className={` absolute inset-0 overflow-hidden transition-all duration-1000 ${
-                    rotation ? "visible z-[100]" : " invisible -z-[1] "
+                className={`absolute inset-0 overflow-hidden duration-700 ease-[cubic-bezier(0.7,0.1,0.45,1)] ${
+                    rotation ? "visible opacity-100 pointer-events-auto z-[100]" : "opacity-0 pointer-events-none z-[100]"
                 }`}
             >
                 <ul>
-                    <li className="shape-circle circle-one curser-pointer"></li>
+                    <li className="shape-circle circle-one cursor-pointer"></li>
 
-                    <li className="shape-circle circle-one curser-pointer"></li>
+                    <li className="shape-circle circle-one cursor-pointer"></li>
                 </ul>
             </nav>
         </div>

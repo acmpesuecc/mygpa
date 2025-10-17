@@ -1,43 +1,81 @@
 .shape-circle {
     border-radius: 50%;
-    width: 20vw;
-    height: 20vw;
-    top: -10vw;
-    left: -10vw;
+    width: clamp(18vw, 22vw, 38vw);
+    height: clamp(18vw, 22vw, 38vw);
+    top: -12vw;
+    left: -12vw;
     position: absolute;
-    transition: all 1s ease-in-out;
+    transition: all 0.7s cubic-bezier(0.7, 0.1, 0.45, 1);
     background: white;
     box-shadow: 0 0px 0px rgba(4, 26, 62, 0.5);
 }
 
 nav.visible li:first-child {
-    width: 100vw;
-    height: 100vw;
-    top: -50vw;
-    left: -50vw;
+    width: clamp(72vw, 95vw, 115vw);
+    height: clamp(72vw, 95vw, 115vw);
+    top: -52vw;
+    left: -52vw;
     z-index: 7;
-    transition: all 0.7s ease-in-out;
+    transition: all 0.7s cubic-bezier(0.7, 0.1, 0.45, 1);
     box-shadow: 0 0px 80px rgba(4, 26, 62, 0.5);
 }
 
 nav.visible li:last-child {
-    width: 50vw;
-    height: 50vw;
-    top: -25vw;
-    left: -25vw;
+    width: clamp(32vw, 48vw, 72vw);
+    height: clamp(32vw, 48vw, 72vw);
+    top: -26vw;
+    left: -26vw;
     z-index: 8;
-    transition: all 0.8s ease-in-out;
+    transition: all 0.7s cubic-bezier(0.7, 0.1, 0.45, 1);
     box-shadow: 0 0px 50px rgba(4, 26, 62, 0.5);
 }
 
 @media screen and (min-width: 1200px) {
     nav.visible li:first-child {
-        width: 80vw;
-        height: 80vw;
+        width: 78vw;
+        height: 78vw;
     }
 
     nav.visible li:last-child {
-        width: 40vw;
-        height: 40vw;
+        width: 38vw;
+        height: 38vw;
     }
+}
+@media (max-width: 600px) {
+    .shape-circle {
+        width: 44vw;
+        height: 44vw;
+        top: -22vw;
+        left: -22vw;
+    }
+    nav.visible li:first-child {
+        width: 110vw;
+        height: 110vw;
+        top: -55vw;
+        left: -55vw;
+    }
+    nav.visible li:last-child {
+        width: 55vw;
+        height: 55vw;
+        top: -27.5vw;
+        left: -27.5vw;
+    }
+}
+
+/* Consistent link placement relative to circle curvature */
+.menu-link {
+    position: absolute;
+    transform: rotate(-48deg);
+    color: black;
+    font-size: clamp(14px, 2.2vw, 28px);
+}
+
+.menu-link-one {
+    left: clamp(20px, 4.5vw, 60px);
+    top: clamp(14px, 4.5vh, 80px);
+}
+
+.menu-link-two {
+    left: clamp(36px, 8vw, 120px);
+    top: clamp(36px, 10vh, 180px);
 }
