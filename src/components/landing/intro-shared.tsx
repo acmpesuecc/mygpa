@@ -4,11 +4,32 @@ import React, { useEffect, useState } from "react";
 import "@/styles/intro.css";
 import Image from "next/image";
 import { motion, type Transition, type Variants } from "motion/react";
-import { spectral } from "./fonts";
+import { spectral } from "../../app/fonts";
 import Button from "./button";
 
-export default function Intro({ welcome }: { welcome: string }) {
+interface IntroSharedProps {
+    welcome: string;
+    imageSrc: string;
+    textSize: "text-4xl" | "text-6xl";
+    containerClassName: string;
+    useExtraWrapper?: boolean;
+    marginTopClass?: string;
+    buttonMarginClass?: string;
+    applySecondGroupMargin?: boolean;
+}
+
+export default function IntroShared({
+    welcome,
+    imageSrc,
+    textSize,
+    containerClassName,
+    useExtraWrapper = false,
+    marginTopClass = "mt-[7rem]",
+    buttonMarginClass = "mt-12",
+    applySecondGroupMargin = false,
+}: IntroSharedProps) {
     const [showbutton, setShowButton] = useState(false);
+
     const container: Variants = {
         hidden: { opacity: 0 },
         visible: (i = 1) => ({
@@ -33,6 +54,7 @@ export default function Intro({ welcome }: { welcome: string }) {
             transition: spring,
         },
     };
+
     const skipAnimation = () => {
         setShowButton(true);
     };
@@ -41,14 +63,13 @@ export default function Intro({ welcome }: { welcome: string }) {
         setTimeout(() => setShowButton(true), 6000);
     }, []);
 
-    return (
-        <div className=" min-h-full min-w-full touch-pan-x overflow-hidden" onClick={skipAnimation}>
-            <Image src="/introbg.jpg" objectFit="cover" fill={true} alt="MyGPA introbg" loading="eager" />
+    const animationContent = (
+        <div>
             <motion.span
                 variants={container}
                 initial={showbutton ? "visible" : "hidden"}
                 animate="visible"
-                className="container mt-[7rem] flex items-center justify-center"
+                className={`container ${!useExtraWrapper ? marginTopClass : ""} flex items-center justify-center`}
             >
                 {welcome
                     .split("")
@@ -56,7 +77,7 @@ export default function Intro({ welcome }: { welcome: string }) {
                     .map((char: string, index: number) => (
                         <motion.span
                             key={index}
-                            className={`el-${index} change-style relative text-4xl ${spectral.className}`}
+                            className={`el-${index} change-style relative ${textSize} ${spectral.className}`}
                             variants={child}
                             custom={index + 1}
                         >
@@ -69,19 +90,32 @@ export default function Intro({ welcome }: { welcome: string }) {
                     .map((char: string, index: number) => (
                         <motion.span
                             key={index}
-                            className={`el-${index + 10} change-style relative text-4xl ${spectral.className}`}
+                            className={`el-${index + 10} change-style relative ${textSize} ${spectral.className}`}
                             variants={child}
                             custom={index * 10 + 1}
-                            style={{
-                                marginRight: `-0.2%`,
-                                paddingLeft: "0.3%",
-                            }}
+                            style={
+                                applySecondGroupMargin
+                                    ? {
+                                          marginRight: `-0.2%`,
+                                          paddingLeft: "0.3%",
+                                      }
+                                    : undefined
+                            }
                         >
                             {char === " " ? "\u00A0" : char}
                         </motion.span>
                     ))}
             </motion.span>
-            <span className="relative mt-12 flex flex-wrap items-center justify-center">{showbutton && <Button />}</span>
+            <span className={`relative ${buttonMarginClass} flex flex-wrap items-center justify-center`}>
+                {showbutton && <Button />}
+            </span>
+        </div>
+    );
+
+    return (
+        <div className={containerClassName} onClick={skipAnimation}>
+            <Image src={imageSrc} objectFit="cover" fill={true} alt="MyGPA introbg" loading="eager" />
+            {useExtraWrapper ? <div className="relative">{animationContent}</div> : animationContent}
         </div>
     );
 }

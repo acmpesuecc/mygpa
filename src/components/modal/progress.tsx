@@ -1,6 +1,6 @@
 "use client";
+import { spectral } from "@/app/fonts";
 import React, { useEffect, useState } from "react";
-import { spectral } from "../fonts";
 export default function GPAProgress({ gpa, openProgress }: { gpa: string; openProgress: boolean }) {
     let radius = 0;
     let multiplier = 0;
@@ -37,7 +37,7 @@ export default function GPAProgress({ gpa, openProgress }: { gpa: string; openPr
                         <circle
                             className={`text-slate-400`}
                             stroke="currentColor"
-                            stroke-width="4"
+                            strokeWidth="4"
                             cx="50%"
                             cy="50%"
                             r={radius}

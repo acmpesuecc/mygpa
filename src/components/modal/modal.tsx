@@ -1,10 +1,10 @@
 "use client";
-import Portal from "./portal";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { spectral } from "../fonts";
-import GPAProgress from "./progress";
 import { useEffect } from "react";
+import Portal from "./portal";
+import { spectral } from "@/app/fonts";
+import GPAProgress from "./progress";
 
 type ModalProps = {
     toggle: () => void;
