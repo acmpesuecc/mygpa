@@ -2,8 +2,6 @@
 
 import { lato } from "./fonts";
 import React, { useEffect } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { stagger, useAnimate } from "framer-motion";
@@ -48,10 +46,15 @@ export default function Button() {
     };
 
     useEffect(() => {
-        AOS.init({
-            easing: "ease",
-            once: true,
-        });
+        // Lazy load AOS
+        const loadAOS = async () => {
+            const AOS = (await import("aos")).default;
+            AOS.init({
+                easing: "ease",
+                once: true,
+            });
+        };
+        loadAOS();
     }, []);
     return (
         <>

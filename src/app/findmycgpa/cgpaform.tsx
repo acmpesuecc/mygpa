@@ -2,8 +2,7 @@
 import { useForm, SubmitHandler, useFieldArray } from "react-hook-form";
 import { poppins, spectral, lato } from "../fonts";
 import React, { useState, useEffect, useRef } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
+// AOS will be lazy loaded
 import { useAnimate } from "motion/react";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import Modal from "../findmysgpa/modal";
@@ -89,10 +88,15 @@ export default function CgpaForm() {
     };
 
     useEffect(() => {
-        AOS.init({
-            easing: "ease",
-            once: true,
-        });
+        // Lazy load AOS
+        const loadAOS = async () => {
+            const AOS = (await import("aos")).default;
+            AOS.init({
+                easing: "ease",
+                once: true,
+            });
+        };
+        loadAOS();
     }, []);
 
     return (

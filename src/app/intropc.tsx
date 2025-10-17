@@ -41,7 +41,16 @@ export default function IntroPC({ welcome }: { welcome: string }) {
     }, []);
     return (
         <div className="flex min-h-screen items-center justify-center overflow-hidden" onClick={skipAnimation}>
-            <Image src="/85327.jpg" objectFit="cover" fill={true} alt="MyGPA introbg" loading="eager" />
+            <Image 
+                src="/85327.jpg" 
+                objectFit="cover" 
+                fill={true} 
+                alt="MyGPA background image showing academic theme" 
+                loading="eager"
+                priority
+                sizes="100vw"
+                quality={85}
+            />
             <div className="relative">
                 <motion.span
                     variants={container}

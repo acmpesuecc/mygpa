@@ -2,8 +2,7 @@
 import { useForm, SubmitHandler, useFieldArray } from "react-hook-form";
 import { poppins, spectral, lato } from "../fonts";
 import React, { useState, useEffect, useRef } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
+// AOS will be lazy loaded
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useAnimate } from "motion/react";
@@ -150,10 +149,15 @@ export default function SgpaForm() {
     };
 
     useEffect(() => {
-        AOS.init({
-            easing: "ease",
-            once: true,
-        });
+        // Lazy load AOS
+        const loadAOS = async () => {
+            const AOS = (await import("aos")).default;
+            AOS.init({
+                easing: "ease",
+                once: true,
+            });
+        };
+        loadAOS();
     }, []);
 
     return (

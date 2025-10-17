@@ -1,38 +1,23 @@
-"use client";
-import Intro from "./intro";
-import { useState, useEffect } from "react";
-import IntroPC from "./intropc";
-import Loading from "./loading";
-function HomePage() {
-    const [isSlim, setSlim] = useState(false);
-    const updateMedia = () => {
-        if (typeof window !== null && window.innerWidth < 1024) {
-            setSlim(true);
-        }
-    };
+import type { Metadata } from "next";
+import HomePageClient from "./home-client";
 
-    useEffect(() => {
-        updateMedia();
-        window.addEventListener("resize", updateMedia);
-        return () => window.removeEventListener("resize", updateMedia);
-    }, []);
-    return (
-        <>
-            <main className="min-w-screen min-h-screen touch-pan-x overflow-hidden">
-                {typeof window !== "undefined" ? (
-                    isSlim ? (
-                        <Intro welcome="Welcome to MyGPA." />
-                    ) : (
-                        <IntroPC welcome="Welcome to MyGPA." />
-                    )
-                ) : (
-                    <>
-                        <Loading />
-                    </>
-                )}
-            </main>
-        </>
-    );
+export const metadata: Metadata = {
+    title: "Home",
+    description: "Welcome to MyGPA - Your comprehensive GPA calculator for PES University. Calculate CGPA and SGPA with ease and track your academic progress.",
+    openGraph: {
+        title: "MyGPA - GPA Calculator for PES University Students",
+        description: "Welcome to MyGPA - Your comprehensive GPA calculator for PES University. Calculate CGPA and SGPA with ease and track your academic progress.",
+        url: "/",
+        type: "website",
+    },
+    twitter: {
+        title: "MyGPA - GPA Calculator for PES University Students",
+        description: "Welcome to MyGPA - Your comprehensive GPA calculator for PES University. Calculate CGPA and SGPA with ease and track your academic progress.",
+    },
+    alternates: {
+        canonical: "/",
+    },
+};
+export default function HomePage() {
+    return <HomePageClient />;
 }
-
-export default HomePage;
